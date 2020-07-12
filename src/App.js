@@ -1,36 +1,23 @@
 import React, { Component } from 'react';
 
 export function App() {
-  const dom = <label htmlFor="bar">bar</label>;
-  const input_dom = <input type="text" onChange={() => { console.log("Clicked!") }} />;
+  const profiles = [
+    { "name": "takayoshi", "age": 29 },
+    { "name": "marie", "age": 29 },
+    { "name": "haruto", "age": 0 }
+  ]
   return (
     <React.Fragment>
-      {dom}
-      {input_dom}
+      {
+        profiles.map((profile, index) => {
+          return <User name={profile.name} age={profile.age} key={index} />
+        })
+      }
     </React.Fragment>
   );
 }
 
-export const AppFunc = () => {
-  const dom = <label htmlFor="func">func</label>;
-  const input_dom = <input type="text" onChange={() => { console.log("Clicked!") }} />;
-  return (
-    <React.Fragment>
-      {dom}
-      {input_dom}
-    </React.Fragment>
-  );
-}
-
-export class AppClass extends Component {
-  render() {
-    const dom = <label htmlFor="class">class</label>;
-    const input_dom = <input type="text" onChange={() => { console.log("Clicked!") }} />;
-    return (
-      <React.Fragment>
-        {dom}
-        {input_dom}
-      </React.Fragment>
-    );
-  }
+const User = (props) => {
+  const dom = <p>I'm {props.name}, {props.age} years old</p>;
+  return dom;
 }
