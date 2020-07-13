@@ -1,16 +1,16 @@
 // Reducerでも使用するため定義してexportしておく
-export const increment = "INCREMENT"
-export const decrement = "DECREMENT"
+export const INCREMENT = "INCREMENT"
+export const DECREMENT = "DECREMENT"
 
-// Action Creator
+// Action Creator(状態の列挙)
 export const increment = () => {
     return {
-        type: increment
+        type: INCREMENT
     }
 }
 
-export const increment = () => {
+export const decrement = () => {
     return {
-        type: decrement
+        type: DECREMENT
     }
 }
