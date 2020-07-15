@@ -1,38 +1,31 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
-export function App() {
-  return (
-    <React.Fragment>
-      <Counter />
-    </React.Fragment>
-  );
-}
+// action creatorをimport
+import { increment, decrement } from '../actions'
 
-class Counter extends Component {
-  constructor(props) {
-    super(props);
-    console.log(this.state);
-    this.state = {
-      count: 0
-    }
-  }
-
-  handlePlusButton = () => {
-    this.setState({ count: this.state.count + 1 });
-  }
-
-  handleMinusButton = () => {
-    this.setState((state) => ({ count: state.count - 1 }));
-  }
-
+class App extends Component {
   render() {
-    console.log(this.state)
+    const props = this.props
     return (
       <React.Fragment>
-        <div>counter: {this.state.count}</div>
-        <button onClick={this.handlePlusButton}>increment</button>
-        <button onClick={this.handleMinusButton}>decrement</button>
+        <div>value: {props.value}</div>
+        <button onClick={props.increment}>increment</button>
+        <button onClick={props.decrement}>decrement</button>
       </React.Fragment >
     )
   }
 }
+
+// mapStateToProps: ステート情報からコンポーネントに必要な情報を取り出す
+const mapStateToProps = (state) => ({
+  value: state.count.value
+})
+
+// mapDispachToProps: あるActionが発生した時にReducerにタイプに応じた状態遷移を実行させる
+const mapDispachToProps = (dispatch) => ({
+  increment: () => dispatch(increment()),
+  decrement: () => dispatch(decrement()),
+})
+
+export default connect(mapStateToProps, mapDispachToProps)(App)
